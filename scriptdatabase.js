@@ -9,10 +9,11 @@ class DataBase {
     this.urlData.push(new Url(url));
     fs.writeFile(
       "./database/database.json",
-      JSON.stringify(this.urlData, null, 4)
-    ).then((res) => {
-      console.log(this.urlData);
-    });
+      JSON.stringify(this.urlData, null, 4),
+      (res) => {
+        return this.urlData;
+      }
+    );
   }
 
   isExist() {}
