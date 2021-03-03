@@ -1,28 +1,46 @@
-const fs = require("fs");
+const fsPromise = require("fs/promises");
 
+// DataBase Class
 class DataBase {
   constructor() {
     this.urlData = [];
   }
 
   addUrl(url) {
-    this.urlData.push(new Url(url));
-    fs.writeFile(
-      "./database/database.json",
-      JSON.stringify(this.urlData, null, 4),
-      (res) => {
-        return this.urlData;
-      }
-    );
+    const newUrl = new Url(url);
+    this.urlData.push(newUrl);
+    const data = JSON.stringify(this.urlData, null, 4);
+    return fsPromise.writeFile("./database/database.json", data).then((res) => {
+      return newUrl;
+    });
   }
 
-  isExist() {}
+  isExist(url) {
+    return fsPromise
+      .readFile("./database/database.json")
+      .then((res) => {
+        let allData = JSON.parse(res);
+        let currentUrl = allData.find((urlElement) => {
+          if (urlElement.originalUrl === url) {
+            return true;
+          }
+        });
+        if (currentUrl) {
+          return currentUrl;
+        }
+        throw new Error();
+      })
+      .catch((e) => {
+        return;
+      });
+  }
 }
 
+// Url Class
 class Url {
   constructor(originalUrl) {
     this.originalUrl = originalUrl;
-    this.shortUrlId = Date.now();
+    this.shortUrlId = `${Date.now()}`;
     this.redirectCount = 0;
     this.creationDate = this.getSQLDate(new Date());
   }
