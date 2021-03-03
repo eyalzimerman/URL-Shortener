@@ -18,6 +18,15 @@ router.post("/new", checkIfExist, (req, res) => {
   });
 });
 
+//Get method
+router.get("/:shorturl", (req, res) => {
+  const { shorturl } = req.params;
+  DB.findOriginalUrl(shorturl).then((objUrl) => {
+    objUrl.redirectCount++;
+    res.redirect(`${objUrl.originalUrl}`);
+  });
+});
+
 // Check if Url Is Exist middleware
 function checkIfExist(req, res, next) {
   const { url } = req.body;

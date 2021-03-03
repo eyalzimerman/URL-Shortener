@@ -34,6 +34,26 @@ class DataBase {
         return;
       });
   }
+
+  findOriginalUrl(shorturl) {
+    return fsPromise
+      .readFile("./database/database.json")
+      .then((data) => {
+        let allData = JSON.parse(data);
+        let currentShortUrl = allData.find((urlElement) => {
+          if (urlElement.shortUrlId === shorturl) {
+            return true;
+          }
+        });
+        if (currentShortUrl) {
+          return currentShortUrl;
+        }
+        throw new Error();
+      })
+      .catch((e) => {
+        return;
+      });
+  }
 }
 
 // Url Class
