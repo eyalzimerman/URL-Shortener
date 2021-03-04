@@ -89,3 +89,22 @@ describe("ShortUrl GET route", () => {
     expect(response.body).toEqual(messageNotFound);
   });
 });
+
+//tests for Statistic Get route
+describe("Statistic Get route", () => {
+  const expectedResultExistUrl = {
+    originalUrl: "https://www.youtube.com/watch?v=tIuU_ra1YmY",
+    shortUrlId: "1614871697604",
+    redirectCount: 7,
+    creationDate: "2021-3-4 17:28:17",
+  };
+
+  it("Should get a short url and return url data object statistic", async () => {
+    const response = await request(app).get("/api/statistic/1614871697604");
+    // Is the status code 200
+    expect(response.status).toBe(200);
+
+    // Is the body equal expectedResult
+    expect(response.body).toEqual(expectedResultExistUrl);
+  });
+});
