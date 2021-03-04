@@ -11,18 +11,19 @@ const DB = new DataBase();
 router.post("/new", checkIfExist, (req, res) => {
   const { url } = req.body;
   if (!validUrl.isUri(url)) {
-    throw new Error("Invalid URL");
+    res.status(400).json({ massage: `${new Error()} Invalid URL` });
+    return;
   }
   DB.addUrl(url)
     .then((newUrl) => {
       res
-        .status(200)
+        .status(201)
         .json(
           `original_url: ${newUrl.originalUrl}, short_url: ${newUrl.shortUrlId}`
         );
     })
     .catch((error) => {
-      res.status(400).send(`${error}`);
+      res.status(500).send(`${error}`);
     });
 });
 
@@ -32,13 +33,16 @@ router.get("/:shorturl", checkUrlFormat, (req, res) => {
   DB.isExist(shorturl, "shortUrlId")
     .then((objUrl) => {
       if (!objUrl) {
-        throw new Error("Short Url Is Not Found");
+        res
+          .status(404)
+          .json({ message: `${new Error()} Short Url Is Not Found` });
+        return;
       }
       DB.updateRedirectClicks(shorturl);
       res.redirect(`${objUrl.originalUrl}`);
     })
     .catch((error) => {
-      res.status(404).send(`${error}`);
+      res.status(500).send(`${error}`);
     });
 });
 
@@ -63,10 +67,10 @@ function checkUrlFormat(req, res, next) {
   const { shorturl } = req.params;
   Number(shorturl);
   if (shorturl.length !== 13 || /\D/.test(shorturl)) {
-    res.status(400).send("ERROR: Wrong Format");
+    res.status(400).json({ message: "ERROR: Wrong Format" });
     return;
   }
   next();
 }
 
-module.exports = router;
+module.exports = { router, DB };

@@ -1,26 +1,14 @@
 [
     {
-        "originalUrl": "https://github.com/suvelocity/cyber4s-final1-boilerplate-url-shortener",
-        "shortUrlId": "1614849386905",
-        "redirectCount": 3,
-        "creationDate": "2021-3-4 11:16:26"
-    },
-    {
         "originalUrl": "https://www.youtube.com/watch?v=tIuU_ra1YmY",
-        "shortUrlId": "1614849462543",
-        "redirectCount": 2,
-        "creationDate": "2021-3-4 11:17:42"
+        "shortUrlId": "1614871355961",
+        "redirectCount": 0,
+        "creationDate": "2021-3-4 17:22:35"
     },
     {
-        "originalUrl": "https://url-shortener-microservice.freecodecamp.rocks/",
-        "shortUrlId": "1614849619836",
-        "redirectCount": 2,
-        "creationDate": "2021-3-4 11:20:19"
-    },
-    {
-        "originalUrl": "https://www.ynet.co.il/home/0,7340,L-8,00.html",
-        "shortUrlId": "1614857100740",
+        "originalUrl": "https://github.com/suvelocity/cyber4s-final1-boilerplate-url-shortener",
+        "shortUrlId": "1614881575466",
         "redirectCount": 1,
-        "creationDate": "2021-3-4 13:25:0"
+        "creationDate": "2021-3-4 20:12:55"
     }
 ]

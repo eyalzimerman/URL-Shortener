@@ -1,4 +1,8 @@
 const fsPromise = require("fs/promises");
+let useDataBase;
+process.env.NODE_ENV === "test"
+  ? (useDataBase = "test")
+  : (useDataBase = "database");
 
 // DataBase Class
 class DataBase {
@@ -14,15 +18,17 @@ class DataBase {
     const newUrl = new Url(url);
     this.urlData.push(newUrl);
     const data = JSON.stringify(this.urlData, null, 4);
-    return fsPromise.writeFile("./database/database.json", data).then((res) => {
-      return newUrl;
-    });
+    return fsPromise
+      .writeFile(`./database/${useDataBase}.json`, data)
+      .then((res) => {
+        return newUrl;
+      });
   }
 
   // check if url or short url is exist
   isExist(url, typeUrl) {
     return fsPromise
-      .readFile("./database/database.json")
+      .readFile(`./database/${useDataBase}.json`)
       .then((res) => {
         let allData = JSON.parse(res);
         let currentUrl = allData.find((urlElement) => {
@@ -53,7 +59,10 @@ class DataBase {
       })
       .then((data) => {
         fsPromise
-          .writeFile("./database/database.json", JSON.stringify(data, null, 4))
+          .writeFile(
+            `./database/${useDataBase}.json`,
+            JSON.stringify(data, null, 4)
+          )
           .then((error) => {
             return error;
           });
@@ -78,7 +87,7 @@ class Url {
 
 // Get data from JSON File
 function getDataFromJSON() {
-  return fsPromise.readFile("./database/database.json").then((res) => {
+  return fsPromise.readFile(`./database/${useDataBase}.json`).then((res) => {
     const allData = JSON.parse(res);
     return allData;
   });
