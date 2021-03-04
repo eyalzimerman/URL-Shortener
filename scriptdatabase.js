@@ -6,6 +6,7 @@ class DataBase {
     this.urlData = [];
   }
 
+  // add url method
   addUrl(url) {
     const newUrl = new Url(url);
     this.urlData.push(newUrl);
@@ -15,13 +16,14 @@ class DataBase {
     });
   }
 
-  isExist(url) {
+  // check if url or short url is exist
+  isExist(url, typeUrl) {
     return fsPromise
       .readFile("./database/database.json")
       .then((res) => {
         let allData = JSON.parse(res);
         let currentUrl = allData.find((urlElement) => {
-          if (urlElement.originalUrl === url) {
+          if (urlElement[typeUrl] === url) {
             return true;
           }
         });
@@ -35,23 +37,23 @@ class DataBase {
       });
   }
 
-  findOriginalUrl(shorturl) {
-    return fsPromise
-      .readFile("./database/database.json")
-      .then((data) => {
-        let allData = JSON.parse(data);
-        let currentShortUrl = allData.find((urlElement) => {
-          if (urlElement.shortUrlId === shorturl) {
+  updateRedirectClicks(shortUrl) {
+    this.isExist(shortUrl, "shortUrlId")
+      .then((resUrl) => {
+        const index = this.urlData.findIndex((matchUrl) => {
+          if (matchUrl.shortUrlId === resUrl.shortUrlId) {
             return true;
           }
         });
-        if (currentShortUrl) {
-          return currentShortUrl;
-        }
-        throw new Error();
+        this.urlData[index].redirectCount++;
+        return this.urlData;
       })
-      .catch((e) => {
-        return;
+      .then((data) => {
+        fsPromise
+          .writeFile("./database/database.json", JSON.stringify(data, null, 4))
+          .then((error) => {
+            return error;
+          });
       });
   }
 }

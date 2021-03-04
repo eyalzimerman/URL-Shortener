@@ -1,8 +1,20 @@
 [
     {
-        "originalUrl": "httpjhgjhs://wwhgfhghdhgfw.youtube.com/watch?v=tIuU_ra1YmY",
-        "shortUrlId": "1614803150848",
-        "redirectCount": 0,
-        "creationDate": "2021-3-3 22:25:50"
+        "originalUrl": "https://github.com/suvelocity/cyber4s-final1-boilerplate-url-shortener",
+        "shortUrlId": "1614849386905",
+        "redirectCount": 3,
+        "creationDate": "2021-3-4 11:16:26"
+    },
+    {
+        "originalUrl": "https://www.youtube.com/watch?v=tIuU_ra1YmY",
+        "shortUrlId": "1614849462543",
+        "redirectCount": 2,
+        "creationDate": "2021-3-4 11:17:42"
+    },
+    {
+        "originalUrl": "https://url-shortener-microservice.freecodecamp.rocks/",
+        "shortUrlId": "1614849619836",
+        "redirectCount": 1,
+        "creationDate": "2021-3-4 11:20:19"
     }
 ]

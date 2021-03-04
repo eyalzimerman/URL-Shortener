@@ -29,11 +29,12 @@ router.post("/new", checkIfExist, (req, res) => {
 //Get method
 router.get("/:shorturl", checkUrlFormat, (req, res) => {
   const { shorturl } = req.params;
-  DB.findOriginalUrl(shorturl)
+  DB.isExist(shorturl, "shortUrlId")
     .then((objUrl) => {
       if (!objUrl) {
         throw new Error("Short Url Is Not Found");
       }
+      DB.updateRedirectClicks(shorturl);
       res.redirect(`${objUrl.originalUrl}`);
     })
     .catch((error) => {
@@ -44,7 +45,7 @@ router.get("/:shorturl", checkUrlFormat, (req, res) => {
 // Check if Url Is Exist middleware
 function checkIfExist(req, res, next) {
   const { url } = req.body;
-  DB.isExist(url)
+  DB.isExist(url, "originalUrl")
     .then((data) => {
       if (data) {
         res.status(200).json(data);
