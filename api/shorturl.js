@@ -58,6 +58,7 @@ function checkIfExist(req, res, next) {
     });
 }
 
+// Check Url Format
 function checkUrlFormat(req, res, next) {
   const { shorturl } = req.params;
   Number(shorturl);

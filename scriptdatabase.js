@@ -4,6 +4,9 @@ const fsPromise = require("fs/promises");
 class DataBase {
   constructor() {
     this.urlData = [];
+    getDataFromJSON().then((res) => {
+      this.urlData = res;
+    });
   }
 
   // add url method
@@ -71,6 +74,14 @@ class Url {
       date.getMonth() + 1
     }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   }
+}
+
+// Get data from JSON File
+function getDataFromJSON() {
+  return fsPromise.readFile("./database/database.json").then((res) => {
+    const allData = JSON.parse(res);
+    return allData;
+  });
 }
 
 module.exports = DataBase;

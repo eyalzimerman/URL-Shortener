@@ -14,7 +14,13 @@
     {
         "originalUrl": "https://url-shortener-microservice.freecodecamp.rocks/",
         "shortUrlId": "1614849619836",
-        "redirectCount": 1,
+        "redirectCount": 2,
         "creationDate": "2021-3-4 11:20:19"
+    },
+    {
+        "originalUrl": "https://www.ynet.co.il/home/0,7340,L-8,00.html",
+        "shortUrlId": "1614857100740",
+        "redirectCount": 1,
+        "creationDate": "2021-3-4 13:25:0"
     }
 ]
