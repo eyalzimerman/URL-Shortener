@@ -21,4 +21,15 @@ router.get("/:shorturlId", (req, res) => {
     });
 });
 
+router.get("/", (req, res) => {
+  fsPromise
+    .readFile("./database/database.json")
+    .then((data) => {
+      res.status(200).json(JSON.parse(data));
+    })
+    .catch((error) => {
+      res.status(500).send(`${error}`);
+    });
+});
+
 module.exports = router;

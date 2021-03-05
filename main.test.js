@@ -53,11 +53,11 @@ describe("Post Route Tests", () => {
     expect(existCreationTime).toEqual(expectedResultExistUrl.creationDate);
   });
 
-  it("Should get a new url and return url data object", async () => {
-    let DBLength = DB.urlData.length;
+  it("Should get a new url and add his object to the database", async () => {
+    let DBLengthBeforePost = DB.urlData.length;
     const response = await request(app).post("/api/shorturl/new").send(newUrl);
 
-    expect(DB.urlData.length).not.toBe(DBLength);
+    expect(DB.urlData.length).not.toBe(DBLengthBeforePost);
   });
 });
 
