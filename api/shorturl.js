@@ -1,6 +1,6 @@
 const express = require("express");
 const fsPromise = require("fs/promises");
-const DataBase = require("../scriptdatabase");
+const DataBase = require("../script");
 const validUrl = require("valid-url");
 const router = express.Router();
 router.use(express.json());

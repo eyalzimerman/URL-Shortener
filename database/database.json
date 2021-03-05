@@ -1,14 +1,8 @@
 [
-    {
-        "originalUrl": "https://www.youtube.com/watch?v=tIuU_ra1YmY",
-        "shortUrlId": "1614871355961",
-        "redirectCount": 0,
-        "creationDate": "2021-3-4 17:22:35"
-    },
-    {
-        "originalUrl": "https://github.com/suvelocity/cyber4s-final1-boilerplate-url-shortener",
-        "shortUrlId": "1614881575466",
-        "redirectCount": 1,
-        "creationDate": "2021-3-4 20:12:55"
-    }
+  {
+    "originalUrl": "https://www.youtube.com/watch?v=tIuU_ra1YmY",
+    "shortUrlId": "1614871355961",
+    "redirectCount": 0,
+    "creationDate": "2021-3-4 17:22:35"
+  }
 ]
