@@ -28,6 +28,7 @@ describe("Post Route Tests", () => {
       .post("/api/shorturl/new")
       .send(invalidUrl);
 
+    // Is the status code 400
     expect(response.status).toBe(400);
 
     // Is the body equal expectedResult
@@ -47,9 +48,10 @@ describe("Post Route Tests", () => {
     // Is the status code 200
     expect(response2.status).toBe(200);
 
-    // Is the body equal expectedResult
+    // Is the existShortUrl equal expectedResult shortUrlId
     expect(existShortUrl).toEqual(expectedResultExistUrl.shortUrlId);
 
+    // Is the existCreationTime equal expectedResult creationDate
     expect(existCreationTime).toEqual(expectedResultExistUrl.creationDate);
   });
 
@@ -57,12 +59,13 @@ describe("Post Route Tests", () => {
     let DBLengthBeforePost = DB.urlData.length;
     const response = await request(app).post("/api/shorturl/new").send(newUrl);
 
+    // Is the length not equal after adding new Url
     expect(DB.urlData.length).not.toBe(DBLengthBeforePost);
   });
 });
 
 // tests for ShortUrl GET route
-describe("ShortUrl GET route", () => {
+describe("ShortUrl GET route Tests", () => {
   afterAll(async () => {
     fsPromise.writeFile(
       `./database/test.json`,
@@ -71,9 +74,11 @@ describe("ShortUrl GET route", () => {
   });
   it("Should get short url and redirect to original url", async () => {
     const response = await request(app).get("/api/shorturl/1614871697604");
+
     // Is the status code 302
     expect(response.status).toBe(302);
 
+    // Is the redirect send to the original Url
     expect(response.header.location).toEqual(
       expectedResultExistUrl.originalUrl
     );
@@ -82,22 +87,26 @@ describe("ShortUrl GET route", () => {
   it("Should get short url not in Format and return error 400", async () => {
     const response = await request(app).get("/api/shorturl/abcdef");
 
+    // Is the status code 400
     expect(response.status).toBe(400);
 
+    // Is the body equal to expectedResult message
     expect(response.body).toEqual(messageNotFormat);
   });
 
   it("Should get short url that does not exist and return status 404 error", async () => {
     const response = await request(app).get("/api/shorturl/1614871123604");
 
+    // Is the status code 404
     expect(response.status).toBe(404);
 
+    // Is the body equal to expectedResult message
     expect(response.body).toEqual(messageNotFound);
   });
 });
 
 //tests for Statistic Get route
-describe("Statistic Get route", () => {
+describe("Statistic Get route Tests", () => {
   afterAll(async () => {
     fsPromise.writeFile(
       `./database/test.json`,
@@ -106,6 +115,7 @@ describe("Statistic Get route", () => {
   });
   it("Should get a short url and return url data object statistic ", async () => {
     const response = await request(app).get("/api/statistic/1614871697604");
+
     // Is the status code 200
     expect(response.status).toBe(200);
 
@@ -116,8 +126,10 @@ describe("Statistic Get route", () => {
   it("Should get short url that does not exist and return status 404 error", async () => {
     const response = await request(app).get("/api/statistic/12334");
 
+    // Is the status code 404
     expect(response.status).toBe(404);
 
+    // Is the body equal expectedResult
     expect(response.body).toEqual(messageNotExist);
   });
 });

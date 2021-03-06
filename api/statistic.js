@@ -14,7 +14,9 @@ router.get("/:shorturlId", (req, res) => {
           .status(404)
           .json({ message: `${new Error()} Short Url Does Not Exist` });
       }
-      res.status(200).json(statistic);
+      const data = [];
+      data.push(statistic);
+      res.status(200).render("statistic", { datas: data });
     })
     .catch((error) => {
       res.status(500).send(`${error}`);
@@ -25,7 +27,7 @@ router.get("/", (req, res) => {
   fsPromise
     .readFile("./database/database.json")
     .then((data) => {
-      res.status(200).json(JSON.parse(data));
+      res.status(200).render("statistic", { datas: JSON.parse(data) });
     })
     .catch((error) => {
       res.status(500).send(`${error}`);
