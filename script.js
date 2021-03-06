@@ -1,8 +1,19 @@
 const fsPromise = require("fs/promises");
+const axios = require("axios").default;
 let useDataBase;
 process.env.NODE_ENV === "test"
   ? (useDataBase = "test")
   : (useDataBase = "database");
+
+const ROOT = "https://api.jsonbin.io/b/";
+const API_KYES = "$2b$10$3c8HlT7Mkm6Fmhp4/y0UveKGq8qFaFdTiTNKewqhEuXpQ9l7Itxdm";
+const binID = "6043c2e8683e7e079c4660ac";
+const headers = {
+  header: {
+    "Content-Type": "application/json",
+    "X-Master-Key": API_KYES,
+  },
+};
 
 // DataBase Class
 class DataBase {
@@ -10,6 +21,11 @@ class DataBase {
     this.urlData = [];
     getDataFromJSON().then((res) => {
       this.urlData = res;
+      if (!res) {
+        getFromJSONBIN().then((data) => {
+          this.urlData = data;
+        });
+      }
     });
   }
 
@@ -17,6 +33,7 @@ class DataBase {
   addUrl(url) {
     const newUrl = new Url(url);
     this.urlData.push(newUrl);
+    setToJSONBIN(this.urlData);
     const data = JSON.stringify(this.urlData, null, 4);
     return fsPromise
       .writeFile(`./database/${useDataBase}.json`, data)
@@ -58,6 +75,7 @@ class DataBase {
         return this.urlData;
       })
       .then((data) => {
+        setToJSONBIN(this.urlData);
         fsPromise
           .writeFile(
             `./database/${useDataBase}.json`,
@@ -91,6 +109,30 @@ function getDataFromJSON() {
     const allData = JSON.parse(res);
     return allData;
   });
+}
+
+// set to JSONBIN.io
+function setToJSONBIN(urls) {
+  axios
+    .put(`${ROOT}${binID}`, urls, headers)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+//get data from JSONBIN.io
+function getFromJSONBIN() {
+  axios
+    .get(`${ROOT}${binID}/latest`, headers)
+    .then((res) => {
+      return res.data.record;
+    })
+    .catch((error) => {
+      return;
+    });
 }
 
 module.exports = DataBase;

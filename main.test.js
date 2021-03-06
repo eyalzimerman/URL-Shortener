@@ -2,6 +2,7 @@ const request = require("supertest");
 const fsPromise = require("fs/promises");
 const app = require("./app");
 const { DB } = require("./api/shorturl");
+const expectResultGetHTMLStatistic = require("./utils");
 
 const existUrl = { url: "https://www.youtube.com/watch?v=tIuU_ra1YmY" };
 const newUrl = { url: "https://www.sport5.co.il/" };
@@ -72,6 +73,7 @@ describe("ShortUrl GET route Tests", () => {
       JSON.stringify([expectedResultExistUrl], null, 4)
     );
   });
+
   it("Should get short url and redirect to original url", async () => {
     const response = await request(app).get("/api/shorturl/1614871697604");
 
@@ -113,14 +115,14 @@ describe("Statistic Get route Tests", () => {
       JSON.stringify([expectedResultExistUrl], null, 4)
     );
   });
-  it("Should get a short url and return url data object statistic ", async () => {
+  it("Should get a short url and return url data object statistic", async () => {
     const response = await request(app).get("/api/statistic/1614871697604");
 
     // Is the status code 200
     expect(response.status).toBe(200);
 
     // Is the body equal expectedResult
-    expect(response.body).toEqual(expectedResultExistUrl);
+    expect(response.text).toEqual(expectResultGetHTMLStatistic);
   });
 
   it("Should get short url that does not exist and return status 404 error", async () => {

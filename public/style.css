@@ -48,8 +48,9 @@ table {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 20px;
+  margin: auto;
   background: #5da1ce;
+  width: fit-content;
 }
 
 td {
@@ -57,6 +58,7 @@ td {
   padding-right: 50px;
   border-radius: 7px;
   line-height: 3;
+  border: black solid 1px;
 }
 
 th {

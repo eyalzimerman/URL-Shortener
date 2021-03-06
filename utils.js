@@ -1,0 +1,2 @@
+const expectResultGetHTMLStatistic = `<!DOCTYPE html><html> <head> <title>statistic</title><link rel="stylesheet" href="../../public/style.css"></head><body> <h1> URL Statistics </h1><table> <tr> <th>Original Url</th><th>Short Url</th><th>Redirect Count</th><th>Creation Date</th><hr></tr><tr> <td>https://www.youtube.com/watch?v=tIuU_ra1YmY</td><td>1614871697604</td><td>0</td><td>2021-3-4 17:28:17</td></tr></table></body></html>`;
+module.exports = expectResultGetHTMLStatistic;
