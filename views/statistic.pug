@@ -1,0 +1,20 @@
+doctype
+html 
+    head 
+        title statistic
+        link(rel="stylesheet", href="../../public/style.css")
+    body 
+        h1  URL Statistics 
+        table 
+            tr 
+                th Original Url
+                th Short Url
+                th Redirect Count
+                th Creation Date
+                hr
+            each data in datas 
+                tr 
+                    td= data.originalUrl
+                    td= data.shortUrlId
+                    td= data.redirectCount
+                    td= data.creationDate

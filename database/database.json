@@ -1,0 +1,26 @@
+[
+    {
+        "originalUrl": "https://www.youtube.com/watch?v=tIuU_ra1YmY",
+        "shortUrlId": "1614871355961",
+        "redirectCount": 0,
+        "creationDate": "2021-3-4 17:22:35"
+    },
+    {
+        "originalUrl": "https://github.com/suvelocity/cyber4s-final1-boilerplate-url-shortener",
+        "shortUrlId": "1615028895196",
+        "redirectCount": 0,
+        "creationDate": "2021-3-6 13:8:15"
+    },
+    {
+        "originalUrl": "https://www.ynet.co.il/home/0,7340,L-8,00.html",
+        "shortUrlId": "1615053789101",
+        "redirectCount": 1,
+        "creationDate": "2021-3-6 20:3:9"
+    },
+    {
+        "originalUrl": "https://jsonbin.io/6043c2e8683e7e079c4660ac",
+        "shortUrlId": "1615053904403",
+        "redirectCount": 0,
+        "creationDate": "2021-3-6 20:5:4"
+    }
+]
